@@ -5,4 +5,5 @@ from tester import app
 logging.basicConfig(level=logging.DEBUG)
 
 
-if '__main__' == '__name__':
+if __name__ == '__main__':
+    app.run()
