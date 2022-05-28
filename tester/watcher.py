@@ -146,7 +146,7 @@ def render_image(idxs: cv2, image: cv2, boxes, confidences, class_ids, filename,
 
 
 def get_number(image_path: Path) -> int:
-    start = time.perf_counter()
+    
     filename, ext = image_path.stem, image_path.suffix
     image = image_prepare(image_path)
     # Затем нам нужно нормализовать, масштабировать и изменить это изображение
@@ -161,6 +161,5 @@ def get_number(image_path: Path) -> int:
     if index_size > 0:
         render_image(idxs, image, boxes, confidences, class_ids, filename, ext)
     create_csv(idxs, boxes, filename)
-    delta_time = time.perf_counter() - start
-    logg.debug(f'Потребовалось: {delta_time:.2f}s')
+    
     return index_size
