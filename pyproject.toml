@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "local-recognizer"
+version = "0.1.0"
+description = ""
+authors = ["RomanZorkin <zorkin.roman@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+opencv-python = "^4.5.5"
+pandas = "^1.4.2"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+mypy = "^0.960"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

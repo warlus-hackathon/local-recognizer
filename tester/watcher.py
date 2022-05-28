@@ -6,7 +6,7 @@ from typing import Any
 import cv2
 import numpy as np
 
-from make_csv import create_csv
+from tester.make_csv import create_csv
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -170,6 +170,3 @@ def get_number(image_path: Path) -> int:
     delta_time = time.perf_counter() - start
     logg.debug(f'Потребовалось: {delta_time:.2f}s')
     return index_size
-
-
-#logg.debug(get_number(image_path))
