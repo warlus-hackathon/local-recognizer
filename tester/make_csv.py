@@ -1,6 +1,7 @@
 import csv
 import logging
 from pathlib import Path
+import pandas as pd
 
 from tester import config
 
@@ -16,6 +17,13 @@ def write_csv(boxes: list[list[int]], file_name: str):
         for row in boxes:
             wr.writerow(row)
 
+def write_csv_pd(boxes, file_name: str):
+    csv_file = Path(config.CSV_DIR, f'{file_name}.csv')
+    df = pd.DataFrame(boxes)
+    df.to_csv(csv_file, encoding='utf-8', index=False)
+
+
+
 
 def create_csv(idxs, boxes, file_name: str):
     centers = []
@@ -29,8 +37,8 @@ def create_csv(idxs, boxes, file_name: str):
             x_center = (x_1 + x_2) // 2
             y_center = (y_1 + y_2) // 2
 
-            centers.append([x_center, y_center])
+            centers.append({'x': x_center, 'y': y_center})            
 
-        write_csv(centers, file_name)
+        write_csv_pd(centers, file_name)
     except:
         pass
