@@ -1,6 +1,7 @@
 import logging
 import time
 from pathlib import Path
+from tkinter import CENTER
 from typing import Any
 
 import cv2
@@ -93,6 +94,10 @@ def create_entities(image: cv2, h: int, w: int) -> tuple[list[Any], list[Any], l
             #logg.info(f'detection.shape: {detection.shape}')
     return (boxes, confidences, class_ids)
 
+def create_txt(file_name: str, centers: list[str]) -> None:
+    new_name = Path('tester/control/txt', f'{file_name}.txt')
+    with open(new_name, 'w') as label:
+        label.writelines(centers)
 
 def render_image(idxs: cv2, image: cv2, boxes, confidences, class_ids, filename, ext) -> None:
     # Отрисовка обнаруженных объектов
@@ -101,7 +106,7 @@ def render_image(idxs: cv2, image: cv2, boxes, confidences, class_ids, filename,
     font_scale = 1
     thickness = 2
     point_size = 1
-    
+    centers = []
     for i in idxs.flatten():
         # извлекаем координаты ограничивающего прямоугольника
         x, y = boxes[i][0], boxes[i][1]
@@ -111,7 +116,7 @@ def render_image(idxs: cv2, image: cv2, boxes, confidences, class_ids, filename,
         
         x_center = (x + x_2) // 2
         y_center = (y + y_2) // 2
-
+        centers.append(f'{x_center} {y_center}\n')
         # рисуем прямоугольник ограничивающей рамки и подписываем на изображении
         color = (0, 255, 0)
         cv2.circle(image, (x_center, y_center), point_size, color, thickness)
@@ -140,7 +145,7 @@ def render_image(idxs: cv2, image: cv2, boxes, confidences, class_ids, filename,
             color=(0, 0, 0),
             thickness=thickness,
         )
-        
+    create_txt(filename, centers)
     new_image_path = Path(config.CONVERSION_IMAGES, f'{filename}_yolov3{ext}')
     cv2.imwrite(str(new_image_path), image)
 
