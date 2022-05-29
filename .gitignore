@@ -132,4 +132,4 @@ dmypy.json
 # project
 models/
 control/
-
+tester/image_prep/images/

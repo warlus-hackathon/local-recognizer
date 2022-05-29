@@ -101,7 +101,7 @@ def render_image(idxs: cv2, image: cv2, boxes, confidences, class_ids, filename,
     font_scale = 1
     thickness = 2
     point_size = 1
-
+    
     for i in idxs.flatten():
         # извлекаем координаты ограничивающего прямоугольника
         x, y = boxes[i][0], boxes[i][1]
