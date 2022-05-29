@@ -93,17 +93,17 @@ def save_txt(name: str, rows: list[str], save_path: Path, part_num) -> None:
 def main():
     get_imgs = Path('tester/control/images/')
     get_jsons = Path('dataset/markup/')
-    post_crop_imgs = 'service/image_prep/images/'
+    post_crop_imgs = 'tester/image_prep/images/'
     post_txt = Path('service/train/data/warlus/labels')
     images = get_images(get_imgs)
     for name, image in images:
         json_path = Path(get_jsons, f'{name}.json')
         parts_sizes = get_crop_sizes(image)
         for part in parts_sizes:
-            created = create_txt(json_path, post_txt, part, name, image)
-            if created:
-                pass
-                # save_imgs(image, part, post_crop_imgs, name)
+            #created = create_txt(json_path, post_txt, part, name, image)
+            #if created:
+            #    pass
+            save_imgs(image, part, post_crop_imgs, name)
 
 
 if __name__ == '__main__':
